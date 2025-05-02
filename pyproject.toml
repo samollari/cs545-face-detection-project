@@ -1,0 +1,14 @@
+[project]
+name = "cs545-face-detection-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mtcnn>=1.0.0",
+    "numpy>=2.1.3",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.2.1",
+    "tensorflow>=2.19.0",
+    "tqdm>=4.67.1",
+]
