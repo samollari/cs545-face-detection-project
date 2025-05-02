@@ -8,14 +8,13 @@ import cv2
 from functools import partial, wraps
 import math
 import os
-from mtcnn import MTCNN
-import concurrent.futures  # Added import
+from facenet_pytorch import MTCNN
 import argparse
 
 from tqdm import tqdm  # Added import
 
 # Initialize MTCNN detector
-detector = MTCNN(device="GPU:0")
+detector = MTCNN(device="cuda")
 
 
 def fit_512(image):
@@ -145,12 +144,14 @@ def edge_detect(image):
     return cv2.Canny(image, 100, 200)
 
 
-def detect_face(image, detector):
-    faces = detector.detect_faces(rgb(image))
-    if not faces:
+def detect_face(image, detector: MTCNN):
+    faces = detector.detect(rgb(image))[0]
+    # print(faces)
+    # return None
+    if faces is None or len(faces) == 0:
         return None
     # Get the bounding box of the first detected face
-    x, y, width, height = faces[0]["box"]
+    x, y, width, height = np.floor(faces[0])
     # Ensure coordinates are within bounds
     x, y = max(0, x), max(0, y)
     return x, y, width, height
