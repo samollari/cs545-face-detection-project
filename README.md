@@ -26,6 +26,8 @@ archive.zip
 │   ├── img1.png
 ```
 
+We used [DigiFace-1M](https://github.com/microsoft/DigiFace1M#downloading-the-dataset) which comes properly structured.
+
 The program will create and output to a directory structured like:
 ```
 archive/
