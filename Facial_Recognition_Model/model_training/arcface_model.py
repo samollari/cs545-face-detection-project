@@ -21,11 +21,11 @@ class SEBlock(nn.Module):
         y = self.fc(y).view(b, c, 1, 1)
         return x * y
 
-class BottleneckIRSE(nn.Module):
+class IRSEBlock(nn.Module):
     expansion = 1  # Not 4 like standard ResNet, ArcFace uses 1
 
     def __init__(self, in_channels, out_channels, stride=1, downsample=None, use_se=True):
-        super(BottleneckIRSE, self).__init__()
+        super(IRSEBlock, self).__init__()
         self.bn0 = nn.BatchNorm2d(in_channels)
         self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(out_channels)
@@ -85,10 +85,10 @@ class ResNetIRSE(nn.Module):
                 nn.BatchNorm2d(out_channels)
             )
         layers = []
-        layers.append(BottleneckIRSE(self.in_channels, out_channels, stride, downsample, use_se=self.use_se))
+        layers.append(IRSEBlock(self.in_channels, out_channels, stride, downsample, use_se=self.use_se))
         self.in_channels = out_channels
         for _ in range(1, blocks):
-            layers.append(BottleneckIRSE(self.in_channels, out_channels, use_se=self.use_se))
+            layers.append(IRSEBlock(self.in_channels, out_channels, use_se=self.use_se))
         return nn.Sequential(*layers)
 
     def _initialize_weights(self):
