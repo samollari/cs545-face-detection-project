@@ -14,6 +14,8 @@ This should create a conda environment called face-recognition which contains al
 
 In addition to creating the conda environment, all datasets need to be downloaded and placed in the `datasets` directory. All datasets used for this project can be found here: https://drive.google.com/drive/u/1/folders/11nIBQhPW4oChXua9knfDDgvT2LqEIwHr
 
+If there are issues downloading any of the datasets, please send an email to advillatoro@wpi.edu or advillato2@gmail.com
+
 #### Note: Do not unzip the zipped dataset folders after downloading them from the drive link. Unzipping these folders will cause the training pipeline to break.  
 
 ### Running
